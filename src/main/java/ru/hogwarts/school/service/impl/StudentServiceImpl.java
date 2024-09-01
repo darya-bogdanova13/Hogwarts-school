@@ -59,4 +59,9 @@ public class StudentServiceImpl implements StudentService {
                 .map(Student::getFaculty)
                 .orElse(null);
     }
+
+    @Override
+    public Object get(Long studentId) {
+        return null;
+    }
 }
