@@ -17,9 +17,10 @@ public class StudentServiceImpl implements StudentService {
     public StudentServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
+
     @Override
     public Student create(Student student) {
-            return studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
     @Override
@@ -48,9 +49,10 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> filterByAge(int age) {
         return studentRepository.findAllByAge(age);
     }
+
     @Override
     public List<Student> findAllByAgeBetween(int fromAge, int toAge) {
-        return findAllByAgeBetween(fromAge, toAge);
+        return studentRepository.findAllByAgeBetween(fromAge, toAge);
     }
 
     @Override
@@ -60,8 +62,20 @@ public class StudentServiceImpl implements StudentService {
                 .orElse(null);
     }
 
+
     @Override
-    public Object get(Long studentId) {
-        return null;
+    public int getAmountOfStudents() {
+        return studentRepository.getAmountOfStudents();
     }
+
+    @Override
+    public double getAverageAgeOfStudents() {
+        return studentRepository.getAverageAgeOfStudents();
+    }
+
+    @Override
+    public List<Student> getLastStudents(int count) {
+        return studentRepository.getLastStudents(count);
+    }
+
 }

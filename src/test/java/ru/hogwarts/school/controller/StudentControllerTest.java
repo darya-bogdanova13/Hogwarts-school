@@ -39,7 +39,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
             Student student = new Student("Harry Potter", 23);
 
             ResponseEntity<Student> studentResponseEntity = restTemplate.postForEntity(
-                    "http://localhost:" + port + "/students/",
+                    "http://localhost:" + port + "/students",
                     student,
                     Student.class
             );
@@ -60,7 +60,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
             Student studentForUpdate = new Student("Harry Potter", 23);
 
             HttpEntity<Student> entity = new HttpEntity<>(studentForUpdate);
-            ResponseEntity<Student> studentResponseEntity = restTemplate.exchange("http://localhost:" + port + "/faculties/" + student.getId(),
+            ResponseEntity<Student> studentResponseEntity = restTemplate.exchange("http://localhost:" + port + "/students/" + student.getId(),
                     HttpMethod.PUT,
                     entity,
                     Student.class
@@ -80,7 +80,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
             student = studentRepository.save(student);
 
             ResponseEntity<Student> studentResponseEntity = restTemplate.getForEntity(
-                    "http://localhost:" + port + "/faculties/" + student.getId(),
+                    "http://localhost:" + port + "/students/get?id=" + student.getId(),
                     Student.class
             );
 
@@ -99,7 +99,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
             student = studentRepository.save(student);
 
             ResponseEntity<Student> studentResponseEntity = restTemplate.exchange(
-                    "http://localhost:" + port + "/faculties/" + student.getId(),
+                    "http://localhost:" + port + "/students/" + student.getId(),
                     HttpMethod.DELETE,
                     null,
                     Student.class

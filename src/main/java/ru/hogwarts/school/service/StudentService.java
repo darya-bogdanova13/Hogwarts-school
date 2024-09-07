@@ -16,5 +16,9 @@ public interface StudentService {
 
     Faculty getFaculty(Long studentId);
 
-    Object get(Long studentId);
+    int getAmountOfStudents();
+
+    double getAverageAgeOfStudents();
+
+    List<Student> getLastStudents(int count);
 }

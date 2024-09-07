@@ -16,8 +16,9 @@ import ru.hogwarts.school.repository.FacultyRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class FacultyControllerTest {
 
     @LocalServerPort
@@ -79,7 +80,7 @@ public class FacultyControllerTest {
         faculty=facultyRepository.save(faculty);
 
         ResponseEntity<Faculty> facultyResponseEntity=restTemplate.getForEntity(
-                "http://localhost:"+port+"/faculties/"+faculty.getId(),
+                "http://localhost:"+port+"/faculties//get?id="+faculty.getId(),
                 Faculty.class
         );
 
