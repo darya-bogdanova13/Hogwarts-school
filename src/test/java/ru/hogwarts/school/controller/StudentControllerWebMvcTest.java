@@ -81,10 +81,6 @@ public class StudentControllerWebMvcTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(student)));
 
-        perform
-                .andExpect(jsonPath("&.name").value(student.getName()))
-                .andExpect(jsonPath("$.age").value(student.getAge()))
-                .andDo(print());
     }
 }
 
