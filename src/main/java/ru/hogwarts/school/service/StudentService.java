@@ -21,4 +21,5 @@ public interface StudentService {
     double getAverageAgeOfStudents();
 
     List<Student> getLastStudents(int count);
+
 }
