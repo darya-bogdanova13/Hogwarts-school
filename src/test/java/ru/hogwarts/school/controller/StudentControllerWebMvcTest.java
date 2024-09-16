@@ -9,12 +9,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repository.StudentRepository;
 import ru.hogwarts.school.service.StudentService;
 import ru.hogwarts.school.service.AvatarService;
 
 
+
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -34,11 +38,11 @@ public class StudentControllerWebMvcTest {
     @MockBean
     private AvatarService avatarService;
 
+
     @Test
     void shouldGetStudent() throws Exception{
-
         Long studentId = 1L;
-        Student student = new Student("Harry Potter",23);
+        Student student = new Student("Harry Potter", 23);
 
         when(studentService.read(studentId)).thenReturn(student);
 
@@ -75,7 +79,7 @@ public class StudentControllerWebMvcTest {
         Long studentId = 1L;
         Student student = new Student("Ronald Weasley", 21);
 
-        when(studentService.update(studentId, student)).thenReturn(student); ///faculties//get?id=//
+        when(studentService.update(studentId, student)).thenReturn(student);
 
         ResultActions perform = mockMvc.perform(put("/students/", studentId)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -83,4 +87,3 @@ public class StudentControllerWebMvcTest {
 
     }
 }
-

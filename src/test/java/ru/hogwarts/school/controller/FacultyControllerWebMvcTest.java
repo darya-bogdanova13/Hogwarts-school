@@ -36,7 +36,7 @@ public class FacultyControllerWebMvcTest {
 
     @Test
     void shouldGetFaculty() throws Exception {
-        Long facultyId = 1L;
+        long facultyId = 1L;
         Faculty faculty = new Faculty("Hufflepuff", "yellow");
 
         when(facultyService.read(facultyId)).thenReturn(faculty);

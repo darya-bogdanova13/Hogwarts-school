@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface StudentService {
     Student create (Student student);
+
     Student read(Long id);
+
     Student update(Long id, Student student);
     Student delete(Long id);
     List<Student> filterByAge (int age);
@@ -15,7 +17,7 @@ public interface StudentService {
     List<Student> findAllByAgeBetween(int fromAge, int toAge);
 
     Faculty getFaculty(Long studentId);
-
+//
     int getAmountOfStudents();
 
     double getAverageAgeOfStudents();
