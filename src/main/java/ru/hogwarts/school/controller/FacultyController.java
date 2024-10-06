@@ -9,7 +9,7 @@ import ru.hogwarts.school.service.FacultyService;
 import java.util.List;
 
 @RestController
-@RequestMapping("faculties")
+@RequestMapping("/faculties")
 public class FacultyController {
     private final FacultyService facultyService;
 
@@ -22,13 +22,13 @@ public class FacultyController {
         return facultyService.create(faculty);
     }
 
-    @GetMapping("{id}")
-    public Faculty read(@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public Faculty read(@PathVariable Long id) {
         return facultyService.read(id);
     }
 
     @PutMapping("{id}")
-    public Faculty update1(@PathVariable Long id, @RequestBody Faculty faculty) {
+    public Faculty update(@PathVariable Long id, @RequestBody Faculty faculty) {
         return facultyService.update(id, faculty);
     }
 
@@ -49,5 +49,9 @@ public class FacultyController {
     @GetMapping("{id}/students")
     public List<Student> getStudents(@PathVariable Long id) {
         return facultyService.getStudents(id);
+    }
+    @GetMapping("longestName")
+    public String getLongestName() {
+        return facultyService.getLongestName();
     }
 }

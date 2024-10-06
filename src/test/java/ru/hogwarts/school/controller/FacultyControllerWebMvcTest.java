@@ -36,7 +36,7 @@ public class FacultyControllerWebMvcTest {
 
     @Test
     void shouldGetFaculty() throws Exception {
-        long facultyId = 1L;
+        Long facultyId = 1L;
         Faculty faculty = new Faculty("Hufflepuff", "yellow");
 
         when(facultyService.read(facultyId)).thenReturn(faculty);
@@ -76,8 +76,12 @@ public class FacultyControllerWebMvcTest {
 
         when(facultyService.update(facultyId, faculty)).thenReturn(faculty);
 
-        ResultActions perform= mockMvc.perform(put("/faculties/")
+        ResultActions perform= mockMvc.perform(put("/faculties/{id}", facultyId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(faculty)));
+        perform
+                .andExpect(jsonPath("$.name").value(faculty.getName()))
+                .andExpect(jsonPath("$.color").value(faculty.getColor()))
+                .andDo(print());
     }
 }

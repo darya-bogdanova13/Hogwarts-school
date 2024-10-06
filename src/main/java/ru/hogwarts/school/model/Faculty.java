@@ -80,6 +80,7 @@ public class Faculty {
                 ", color='" + color + '\'' +
                 '}';
     }
+
     public List<Student> getStudents() {
         return students;
     }

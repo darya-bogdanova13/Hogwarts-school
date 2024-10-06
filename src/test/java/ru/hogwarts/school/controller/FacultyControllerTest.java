@@ -1,6 +1,6 @@
 package ru.hogwarts.school.controller;
 
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -35,6 +36,7 @@ public class FacultyControllerTest {
         facultyRepository.deleteAll();
     }
 
+
     @Test
     void shouldCreateFaculty() {
         Faculty faculty= new Faculty("Griffindor", "Green");
@@ -49,7 +51,7 @@ public class FacultyControllerTest {
         Faculty actualFaculty=facultyResponseEntity.getBody();
         assertNotNull(actualFaculty.getId());
         assertEquals(actualFaculty.getName(),faculty.getName());
-        org.assertj.core.api.Assertions.assertThat(actualFaculty.getColor()).isEqualTo(faculty.getColor());
+        assertThat(actualFaculty.getColor()).isEqualTo(faculty.getColor());
     }
 
     @Test
@@ -80,15 +82,15 @@ public class FacultyControllerTest {
         faculty=facultyRepository.save(faculty);
 
         ResponseEntity<Faculty> facultyResponseEntity=restTemplate.getForEntity(
-                "http://localhost:"+port+"/faculties//get?id="+faculty.getId(),
+                "http://localhost:"+port+"/faculties/" + faculty.getId(),
                 Faculty.class
         );
 
         assertNotNull(facultyResponseEntity);
-        Assertions.assertEquals(facultyResponseEntity.getStatusCode(), HttpStatusCode.valueOf(200));
+        assertEquals(facultyResponseEntity.getStatusCode(), HttpStatusCode.valueOf(200));
 
         Faculty actualFaculty=facultyResponseEntity.getBody();
-        Assertions.assertEquals(actualFaculty.getId(),faculty.getId());
+        assertEquals(actualFaculty.getId(),faculty.getId());
         assertEquals(actualFaculty.getName(),faculty.getName());
         assertEquals(actualFaculty.getColor(),faculty.getColor());
     }
@@ -107,6 +109,6 @@ public class FacultyControllerTest {
         );
         assertNotNull(facultyResponseEntity);
         assertEquals(facultyResponseEntity.getStatusCode(), HttpStatusCode.valueOf(200));
-        org.assertj.core.api.Assertions.assertThat(facultyRepository.findById(faculty.getId())).isNotPresent();
+        assertThat(facultyRepository.findById(faculty.getId())).isNotPresent();
     }
 }

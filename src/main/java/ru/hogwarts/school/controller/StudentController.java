@@ -23,7 +23,7 @@ public class StudentController {
     }
 
     @GetMapping("{id}")
-    public Student read(@RequestParam Long id) {
+    public Student read(@PathVariable Long id) {
         return studentService.read(id);
     }
 
@@ -63,5 +63,13 @@ public class StudentController {
     @GetMapping("/last-students")
     public List<Student> getLastStudents(@RequestParam int count) {
             return studentService.getLastStudents(count);
+    }
+    @GetMapping("startsWithA")
+    public List<String> startsWithA() {
+        return studentService.startsWithA();
+    }
+    @GetMapping("averageAge")
+    public double getAverageAge() {
+        return studentService.getAverageAge();
     }
 }
